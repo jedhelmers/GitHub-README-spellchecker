@@ -6,5 +6,6 @@ except ImportError:
 # to search
 query = 'site:https://github.com AND url:README.md'
 
-for j in search(query, tld="co.in", num=100, stop=1, pause=2):
+for j in search(query, tld="co.in", num=10, stop=100, pause=0):
     print(j)
+print "\n"
