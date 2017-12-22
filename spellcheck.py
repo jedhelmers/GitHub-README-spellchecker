@@ -9,17 +9,20 @@ for url in urls:
     #Scrape site
     soup = BeautifulSoup(urllib2.urlopen(url).read(), "lxml")
 
+    #extract unwanted tags HERE
+    [s.extract() for s in soup(['code', 'a'])]
+
     text = ''
     p = ''
-    bodyCopies = soup.find_all(class_ = 'container')
+    bodyCopies = soup.find_all(class_ = 'markdown-body')
+
     for body in bodyCopies:
         texts = body.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'li'])
         for text in texts:
             p = text
 
-            #ERROR: it's currently grabbing code divs within p tags
             print p.getText()
-        print '\n'
+    print '\n'
     #Get meaningful text within Class .readme
     #Check paragraph tags. This should ignore all code-based text on the page
 
