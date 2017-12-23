@@ -1,18 +1,21 @@
 import urllib2
 from bs4 import BeautifulSoup
 
-from enchant.checker import SpellChecker
-chkr = SpellChecker("en_US")
+# Terminal Absolute clear: clear && printf '\e[3J'
 
-personal_dictionary = ['URL', 'URLS', 'Simpliest', 'github']
+def world():
+    print ''
 
-#d2 = enchant.DictWithPWL("en_US","mywords.txt")
 
-#get URLs
-urls = ["https://github.com/aandryashin/urls/blob/master/README.md", "https://github.com/jedhelmers/GitHub-README-spellchecker/blob/master/README.md"]
+def spellCheck(url):
+    from enchant.checker import SpellChecker
+    chkr = SpellChecker("en_US")
 
-#iterate through URLs
-for url in urls:
+    #get URLs
+    #urls = ["https://github.com/aandryashin/urls/blob/master/README.md", "https://github.com/jedhelmers/GitHub-README-spellchecker/blob/master/README.md"]
+
+    #iterate through URLs
+    #for url in urls:
     #Scrape site
     soup = BeautifulSoup(urllib2.urlopen(url).read(), "lxml")
 
@@ -23,6 +26,11 @@ for url in urls:
     p = ''
     bodyCopies = soup.find_all(class_ = 'markdown-body')
 
+    print 'Site: %s' % url
+    print "Mispelled words: "
+    errorList = []
+
+
     for body in bodyCopies:
         texts = body.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'li'])
         for text in texts:
@@ -30,12 +38,11 @@ for url in urls:
             chkr.set_text(p)
             try:
                 for err in chkr:
-                    for x in personal_dictionary:
-                        if err.word == x.upper():
+                    errorList.append(err.word)
+                    for error in errorList:
+                        if err.word.upper() != error:
+                            print err.word
                             break
-                        else:
-                            print "ERROR", err.word, x.upper()
-                            
             except:
                 print ""
 
@@ -44,4 +51,4 @@ for url in urls:
     #Get meaningful text within Class .readme
     #Check paragraph tags. This should ignore all code-based text on the page
 
-#print text
+    #print text

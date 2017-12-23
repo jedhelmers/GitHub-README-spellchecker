@@ -1,12 +1,3 @@
-import spellcheck
-
-try:
-    from google import search
-except ImportError:
-    print("No module named 'google' found")
-
-
-
 urls = ['https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet',
 'https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet',
 'https://github.com/adam-p/markdown-here/wiki/Other-Markdown-Tools',
@@ -109,16 +100,3 @@ urls = ['https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet',
 'https://gist.github.com/atenni/5604615',
 'http://jbt.github.com/markdown-editor',
 'https://github.com/tableflip/share-my-url']
-
-# to search
-query = 'site:https://github.com AND url:README.md'
-
-#for j in search(query, tld="co.in", num=1, stop=4, pause=0):
-#    spellcheck.spellCheck(j)
-#    print(j)
-
-for url in urls:
-    spellcheck.spellCheck(url)
-    #print(url)
-
-#print "\n"
