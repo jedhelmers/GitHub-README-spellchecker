@@ -2,42 +2,42 @@ import urllib2
 from bs4 import BeautifulSoup
 
 # Terminal Absolute clear: clear && printf '\e[3J'
-
-def world():
-    print ''
+# VERY HANDY!
 
 
+# Spellcheck function that brings in a URL then processes
 def spellCheck(url):
     from enchant.checker import SpellChecker
     chkr = SpellChecker("en_US")
 
-    #get URLs
-    #urls = ["https://github.com/aandryashin/urls/blob/master/README.md", "https://github.com/jedhelmers/GitHub-README-spellchecker/blob/master/README.md"]
-
-    #iterate through URLs
-    #for url in urls:
     #Scrape site
     soup = BeautifulSoup(urllib2.urlopen(url).read(), "lxml")
 
-    #extract unwanted tags HERE
+    # Extract unwanted tags HERE
     [s.extract() for s in soup(['code', 'a'])]
 
+    # Clear local variables
+    errorList = []
     text = ''
     p = ''
+    # Get meaningful text within Class .markdown-body
     bodyCopies = soup.find_all(class_ = 'markdown-body')
 
+    # Output header
     print 'Site: %s' % url
     print "Mispelled words: "
-    errorList = []
 
-
+    # Iterate through text
     for body in bodyCopies:
+        # Tag list to look through
+        # Check paragraph tags. This should ignore all code-based text on the page
         texts = body.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'li'])
         for text in texts:
             p = text.getText().upper()
             chkr.set_text(p)
             try:
                 for err in chkr:
+                    # Cleanse duplicates
                     errorList.append(err.word)
                     for error in errorList:
                         if err.word.upper() != error:
@@ -45,10 +45,4 @@ def spellCheck(url):
                             break
             except:
                 print ""
-
-            #print p.getText()
     print '\n'
-    #Get meaningful text within Class .readme
-    #Check paragraph tags. This should ignore all code-based text on the page
-
-    #print text
