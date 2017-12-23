@@ -2,7 +2,11 @@
 from enchant.checker import SpellChecker
 chkr = SpellChecker("en_US")
 
-words = ['url', 'urls', 'github', 'html', 'http', 'https', 'BeautifulSoup', 'etcd', 'pip', 'sudo', 'readme', 'spellchecker']
+chkr.add('STRIKETHROUGH')
+
+with open('mywords.txt') as f:
+    words = f.readlines()
 
 for word in words:
-    chkr.add(word)
+    chkr.add(word.strip())
+    print word.strip()
