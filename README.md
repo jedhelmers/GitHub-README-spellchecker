@@ -14,3 +14,4 @@ You might have to run these as SUDO commands.
 
 # Google search
 This script uses google so it's currently having issues with high volume searching. Google loves restricting that sort of thing.
+I'll probably switch over to a different API, but for now it is what it is.
