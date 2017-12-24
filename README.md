@@ -10,4 +10,7 @@ This line is mispeled on porpose
 ```pip install beautifulsoup4```
 ```pip install google```
 
-You might have to run them as SUDO commands.
+You might have to run these as SUDO commands.
+
+# Google search
+This script uses google so it's currently having issues with high volume searching. Google loves restricting that sort of thing.
