@@ -10,8 +10,11 @@ except ImportError:
 # Search: Dump what you would say in a normal google search
 query = 'site:https://github.com AND url:README.md'
 
-for j in search(query, tld="co.in", num=10, stop=4, pause=0):
-    spellcheck.spellCheck(j)
+for j in search(query, tld="co.in", num=10, lang='en', start=201, stop=300, pause=0):
+    try:
+        spellcheck.spellCheck(j)
+    except:
+        print ""
     #print(j)
 
 #for url in urls:
