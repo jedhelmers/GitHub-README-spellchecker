@@ -27,7 +27,7 @@ def spellCheck(url):
     # Output header
     print 'Site: %s' % url
     print "Mispelled words: "
-
+    f.write('%s \n Mispelled words: \n' % url)
     # Iterate through text
     for body in bodyCopies:
         # Tag list to look through
@@ -42,10 +42,11 @@ def spellCheck(url):
                     errorList.append(err.word)
                     for error in errorList:
                         if err.word.upper() != error:
-                            f.write(err.word)
+                            f.write('%s \n' % err.word)
                             print err.word
                             break
             except:
                 print ""
     print '\n'
+    f.write('\n')
     f.close()
