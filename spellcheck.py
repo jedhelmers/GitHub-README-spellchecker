@@ -4,9 +4,10 @@ from bs4 import BeautifulSoup
 # Terminal Absolute clear: clear && printf '\e[3J'
 # VERY HANDY!
 
-
 # Spellcheck function that brings in a URL then processes
 def spellCheck(url):
+    f = open('TyposList.txt', 'a')
+
     from enchant.checker import SpellChecker
     chkr = SpellChecker("en_US")
 
@@ -41,8 +42,10 @@ def spellCheck(url):
                     errorList.append(err.word)
                     for error in errorList:
                         if err.word.upper() != error:
+                            f.write(err.word)
                             print err.word
                             break
             except:
                 print ""
     print '\n'
+    f.close()
